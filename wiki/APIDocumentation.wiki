@@ -1,0 +1,94 @@
+#summary This page describes the messages a client can send to or receive from the plugin.
+#labels Phase-Implementation,Featured
+
+= API Documentation =
+
+If you want your client to use WifiRemote to remote control MediaPortal you have to understand the "language" the plugin communicates in.
+
+<wiki:toc max_depth="3" />
+
+
+The WifiRemote language consists of small JSON messages.
+A message always consists of a "Type" field (string), which identifies what kind of message is sent.
+This is a list of all messages a client can send to WifiRemote and messages WifiRemote sends to the client.
+
+
+----
+
+
+== Messages from WifiRemote to the client ==
+
+=== welcome ===
+The welcome message is sent to every client (socket) that connects to WifiRemote. It contains information about the plugin and about the current status of MediaPortal.
+
+==== Fields ====
+  * Type (string): Type of the message, always "welcome"
+  * Server_Version (int): Version of the server. A client can require a certain version of the server, to make sure all required features are supported by the plugin.
+  * Status (object): This field contains a [APIDocumentation#status Status message]. See below.
+  * Volume (object): This field contains a [APIDocumentation#volume Volume message]. See below.
+
+Example:
+{{{
+{
+  "Type":"welcome",
+  "Server_Version":2,
+  "Status":{
+    "Type":"status",
+    "IsPlaying":false,
+    "IsPaused":false,
+    "Title":"",
+    "CurrentModule":"Homescreen",
+    "SelectedItem":"Music"
+  },
+  "Volume":{
+    "Type":"volume",
+    "Volume":100,
+    "IsMuted":false"
+  }
+}
+}}}
+
+
+=== status ===
+Describes the current status of MediaPortal, consisting of player and navigation related information.
+This is sent when the status changes (a file starts/stops playing, the user navigates in MediaPortal) and integrated in the [APIDocumentation#welcome welcome message].
+
+==== Fields ====
+  * Type (string): Type of the message, always "status"
+  * IsPlaying (boolean): true if MediaPortal is playing a file, false otherwise
+  * IsPaused (boolean): true if MediaPortal is playing a file but it is paused, false otherwise
+  * Title (string): Title of the currently played media file (for example "Hot Fuzz")
+  * CurrentModule (string): Currently active module (for example "TV Series")
+  * SelectedItem (string): Selected item in the skin. This is working a bit flaky at the moment. (for example: "Switch view")
+
+Example:
+{{{
+{
+  "Type":"status",
+  "IsPlaying":false,
+  "IsPaused":false,
+  "Title":"",
+  "CurrentModule":"Homescreen",
+  "SelectedItem":"Music"
+}
+}}}
+
+
+
+=== volume ===
+A message containing information about MediaPortals volume.
+This is sent when there was a change in volume and integrated in the [APIDocumentation#welcome welcome message].
+
+==== Fields ====
+  * Type (string): Type of the message, always "volume"
+  * Volume (int): Volume set in MediaPortal in percent (0 - 100)
+  * IsMuted (boolean): true if the sound in MediaPortal is muted, false otherwise
+
+Example:
+{{{
+{
+  "Type":"volume",
+  "Volume":100,
+  "IsMuted":false"
+}
+}}}
