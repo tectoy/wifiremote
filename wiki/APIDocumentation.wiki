@@ -5,6 +5,8 @@
 
 If you want your client to use WifiRemote to remote control MediaPortal you have to understand the "language" the plugin communicates in.
 
+*This documentation is for developers only. If you just want to use the plugin, you don't need to know all this!*
+
 <wiki:toc max_depth="3" />
 
 
@@ -122,5 +124,63 @@ Example:
       "Icon":"…"
     }
   ]
+}
+}}}
+
+
+=== nowplaying ===
+A nowplaying message is sent to all connected clients when playback of a supported file starts.
+This message contains information about the file, taken from the corresponding plugins like MP-TVSeries or Moving Pictures. Due to the differences in the plugins the content of the nowplaying message can vary.
+
+
+==== Fields (global) ====
+  * Type (string): Type of the message, always "nowplaying"
+  * Duration (int): Duration of the file in seconds
+  * Position (int): Current position in the file in seconds
+  * File (string): Path of the file
+  * MediaInfo (object): An object containing media specific information. You can check which type of information it is with the MediaInfo field "MediaType".
+
+==== Fields (series) ====
+  * MediaType (string): Type of MediaInfo, for series always "series"
+  * Series (string): Name of the series
+  * Season (int): Season of this episode
+  * Episode (int): Number of this episode in the season
+  * Title (string): Name of the episode
+  * AirDate (string): First air date of the episode
+  * Director (string): Director(s) of the episode
+  * Writer (string): Writer(s) of the episode
+  * Genre (string): Genre(s) of the series
+  * Image (string): byte-array representation of the season poster image. You can initialize an image from this string in your client. The string is cut in the example
+  * MyRating (string): Rating the user gave this episode
+  * Plot (string): Plot description of this episode
+  * Rating (string): Online rating of this episode
+  * RatingCount (string): Number of votes this episode got online
+  * Status (string): Status of the series. Can be "Continuing" and "Ended".
+  
+
+Example:
+{{{
+{
+    "Type":"nowplaying",
+    "Duration":2458,
+    "Position":0,
+    "File":"",
+    "MediaInfo":{
+        "MediaType":"series",
+        "Series":"24",
+        "Season":1,
+        "Episode":1,
+        "Title":"Tag 1: 00:00Uhr-01:00Uhr",
+        "AirDate":"2001-11-06",
+        "Director":"Stephen Hopkins",
+        "Writer":"Robert Cochran, Joel Surnow",
+        "Genre":"|Action and Adventure|Drama|",
+        "Image":"/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQN…",
+        "MyRating":"",
+        "Plot":"Stressiger Abend f\U00fcr CTU-Agent Jack Bauer: Seine halbw\U00fcchsige Tochter Kimberly stiehlt sich unerlaubt aus dem Haus. Aber bevor er sich auf die Suche machen kann, wird er dringend ins B\U00fcro zitiert, denn Terroristen planen einen Anschlag auf Senator David Palmer. Es scheint eine lange Nacht f\U00fcr den Agenten zu werden…",
+        "Rating":"7.5",
+        "RatingCount":"",
+        "Status":"Ended"
+    }
 }
 }}}
