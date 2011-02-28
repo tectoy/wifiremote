@@ -92,3 +92,35 @@ Example:
   "IsMuted":false"
 }
 }}}
+
+
+
+=== plugins ===
+The plugins message is sent in response to a [APIDocumentation#requestplugins requestplugins message]. 
+It contains a list of all installed and active window plugins in MediaPortal including the plugin name, the icon as byte array and the window id of the plugin
+
+==== Fields ====
+  * Type (string): Type of the message, always "plugins"
+  * Plugins (array): An array, containing one object per plugin with these fields:
+    * Name (string): Name of the plugin in the same language as configured in MediaPortal
+    * WindowId (int): Window ID of the plugin. This can be used to activate the plugin via the [APIDocumentation#window window message].
+    * Icon (string): This string is a byte-array representation of the plugin icon png file. In the example it is cut to see what's going on. In your client you can get the image from this string and display it.
+
+Example:
+{{{
+{
+  "Type":"plugins",
+  "Plugins":[
+    {
+      "Name":"Play Disc",
+      "WindowId":3001,
+      "Icon":"iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAAAgHBwsLCxgYGCYmJjAvMDc3N0pJSlBPUFZVVmloaXh4eImJiZaWlpmsvpqytJuwvZ+5sZ+4vaSjpKqkqaurq6+rsKS7rqq8pqm8qqa0vaO5s6C4u6q3uai5vLGqr7yvq7OnsrKrsrqsu7K9pr60q7u/pL64rbOys7W8tLW+vLy2s7qzur65tL29vZurwpuzwaOrxauqw6C3yaW+xqa7z6y0xK+5xaa60au61LSswrqtw7O1xLS7wbq0wry0zL2+wLC917S82Lu51Li82KXAqqvBpqrAq6bBvarEu63KuLLDpLLDrbfIpbDJrbvDpLvEq7/LpL3Lq7…"
+    },
+    {
+      "Name":"Moving Pictures",
+      "WindowId":12345,
+      "Icon":"…"
+    }
+  ]
+}
+}}}
