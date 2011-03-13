@@ -184,3 +184,47 @@ Example:
     }
 }
 }}}
+
+
+==== Fields (moving-pictures) ====
+  * MediaType (string): Type of MediaInfo, for moving-pictures always "movies"
+  * Title (string): Name of the movie
+  * AlternateTitles (string, pipe | separated): Alternate names of the movie (foreign names)
+  * Tagline (string): Tagline of the movie
+  * Year (int): Release year of the movie
+  * Directors (string, pipe | separated): Directors of the movie
+  * Writers (string, pipe | separated): Writers of the movie
+  * Actors (string, pipe | separated): List of actors in the movie
+  * Genres (string, pipe | separated): Genre(s) of the movie
+  * Certification (string): Certification of the movie
+  * DetailsUrl (string): URL to a website where the movie information was scraped from
+  * Image (string): Byte-array representation of the movie poster image. You can initialize an image from this string in your client. The string is cut in the example
+  * Rating (string): Online rating of the movie
+  * Summary (string): Movie summary
+  
+
+Example:
+{{{
+{
+    "Type":"nowplaying",
+    "Duration":7177,
+    "Position":0,
+    "File":"";
+    "MediaInfo":{
+        "MediaType":"movie",
+        "Title":"Star Wars",
+        "AlternateTitles":"|La guerra de las galaxias|La guerre des \U00e9toiles|",
+        "Tagline":"It's Back! (re-release)",
+        "Year":1977,
+        "Directors":"|George Lucas|",
+        "Writers":"|George Lucas|",
+        "Actors":"|Mark Hamill|Harrison Ford|Carrie Fisher|Peter Cushing|Alec Guinness|Anthony Daniels|Kenny Baker|Peter Mayhew|David Prowse|James Earl Jones|",
+        "Genres":"|Action|Adventure|Fantasy|Sci-Fi|",
+        "Certification":"PG",
+        "DetailsUrl":"http://www.imdb.com/title/tt0076759",
+        "Image":"/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKD…",
+        "Rating":"8,8",
+        "Summary":"Part IV in a George Lucas epic, Star Wars: A New Hope opens with a rebel ship being boarded by the tyrannical Darth Vader. The plot then follows the life of a simple farmboy, Luke Skywalker, as he and his newly met allies (Han Solo, Chewbacca, Ben Kenobi, C-3PO, R2-D2) attempt to rescue a rebel leader, Princess Leia, from the clutches of the Empire. The conclusion is culminated as the Rebels, including Skywalker and flying ace Wedge Antilles make an attack on the Empires most powerful and ominous weapon, the Death Star."
+    }
+}
+}}}
