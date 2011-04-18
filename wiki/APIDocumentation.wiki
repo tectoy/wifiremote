@@ -99,7 +99,7 @@ Example:
 
 === plugins ===
 The plugins message is sent in response to a [APIDocumentation#requestplugins requestplugins message]. 
-It contains a list of all installed and active window plugins in MediaPortal including the plugin name, the icon as byte array and the window id of the plugin
+It contains a list of all installed and active window plugins in MediaPortal including the plugin name, the icon as byte array (if requested) and the window id of the plugin
 
 ==== Fields ====
   * Type (string): Type of the message, always "plugins"
@@ -127,6 +127,22 @@ Example:
 }
 }}}
 
+=== properties ===
+This message is sent in response to a "properties" request message. It contains the properties (tag and value) of all requested tags. Furthermore, from now on the client will be notified if one of the requested properties changes with a propertychanged message. Only properties that start with #Play or #TV.View are currently supported. See http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/18_Contribute/7_Skins/Skin_Architecture/Current_File_Tags for a list of supported tags.
+
+==== Fields ====
+  * Type (string): Type of the message, always "plugins"
+  * Tags (array): An array, containing one object per plugin with these fields:
+    * Tag (string): Name of the property
+    * Value (string): Value of the property.
+
+=== propertychanged ===
+The propertychanged  message is sent when one of the tags changes, to which the client has registered for with the properties message.
+
+==== Fields ====
+  * Type (string): Type of the message, always "plugins"
+  * Tag (string): Name of the property
+  * Value (string): Value of the property.
 
 === nowplaying ===
 A nowplaying message is sent to all connected clients when playback of a supported file starts.
@@ -226,5 +242,28 @@ Example:
         "Rating":"8,8",
         "Summary":"Part IV in a George Lucas epic, Star Wars: A New Hope opens with a rebel ship being boarded by the tyrannical Darth Vader. The plot then follows the life of a simple farmboy, Luke Skywalker, as he and his newly met allies (Han Solo, Chewbacca, Ben Kenobi, C-3PO, R2-D2) attempt to rescue a rebel leader, Princess Leia, from the clutches of the Empire. The conclusion is culminated as the Rebels, including Skywalker and flying ace Wedge Antilles make an attack on the Empires most powerful and ominous weapon, the Death Star."
     }
+}
+}}}
+
+=== nowplayingupdate ===
+A nowplayingupdate message is sent to all connected clients in fixed intervals during playback of a media item.
+This message contains information about the current playing state (duration, position, speed,...). It is meant to update a representation of the playback state on the remote end.
+
+
+==== Fields (global) ====
+  * Type (string): Type of the message, always "nowplayingupdate "
+  * Duration (int): Duration of the file in seconds
+  * Position (int): Current position in the file in seconds
+  * Speed (int): Current speed of the player
+  * IsTv (bool): True if the currently playing item is a tv stream.
+
+Example:
+{{{
+{
+    "Type":"nowplayingupdate",
+    "Duration":7177,
+    "Position":40,
+    "Speed":1;
+    "IsTv":true
 }
 }}}
