@@ -267,3 +267,18 @@ Example:
     "IsTv":true
 }
 }}}
+
+=== onscreenkeyboard ===
+A short message informing clients about the MediaPortal onscreen keyboard appearing and disappearing.
+
+==== Fields ====
+  * Type (string): Type of the message, always "onscreenkeyboard"
+  * IsActive (bool): True if the onscreen keyboard is active, false otherwise
+
+Example:
+{{{
+{
+    "Type":"onscreenkeyboard",
+    "IsActive":true
+}
+}}}
