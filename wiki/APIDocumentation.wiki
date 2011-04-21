@@ -1,5 +1,5 @@
 #summary This page describes the messages a client can send to or receive from the plugin.
-#labels Phase-Implementation,Featured
+#labels Phase-Implementation
 
 = API Documentation =
 
