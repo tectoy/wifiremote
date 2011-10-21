@@ -1,6 +1,14 @@
 #summary This page describes the messages a client can send to or receive from the plugin.
 #labels Phase-Implementation
 
+
+
+= ATTENTION =
+<font color="red">This document is outdated! Please find the full documentation here: [http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/WifiRemote]</font>
+
+
+---
+
 = API Documentation =
 
 If you want your client to use WifiRemote to remote control MediaPortal you have to understand the "language" the plugin communicates in.
